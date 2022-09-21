@@ -103,4 +103,45 @@ function getlosses() {
         isWin = true;
   }
 }
+function checkLetters(letter) {
+    var letterInWord = false;
+    for (var i = 0; i < numBlanks; i++) {
+      if (chosenWord[i] === letter) {
+        letterInWord = true;
+      }
+    }
+    if (letterInWord) {
+      for (var j = 0; j < numBlanks; j++) {
+        if (chosenWord[j] === letter) {
+          blanksLetters[j] = letter;
+        }
+      }
+      wordBlank.textContent = blanksLetters.join(" ");
+    }
+  }
+  document.addEventListener("keydown", function(event) {
+    // If the count is zero, exit function
+    if (timerCount === 0) {
+      return;
+    }
+    var key = event.key.toLowerCase();
+  var alphabetNumericCharacters = "abcdefghijklmnopqrstuvwxyz0123456789 ".split("");
+  // Test if key pushed is letter
+  if (alphabetNumericCharacters.includes(key)) {
+    var letterGuessed = event.key;
+    checkLetters(letterGuessed)
+    checkWin();
+  }
+});
+startButton.addEventListener("click", startGame);
+init();
 
+var resetButton = document.querySelector(".reset-button");
+function resetGame() {
+    // Resets win and loss counts
+    winCounter = 0;
+    loseCounter = 0;
+    setWins()
+  setLosses()
+}
+resetButton.addEventListener("click", resetGame);
