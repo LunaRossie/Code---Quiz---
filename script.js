@@ -62,3 +62,45 @@ function loseGame() {
       }
     }, 1000);
   }
+  function renderBlanks() {
+    chosenWord = words[Math.floor(Math.random() * words.length)];
+  lettersInChosenWord = chosenWord.split("");
+  numBlanks = lettersInChosenWord.length;
+  blanksLetters = []
+  for (var i = 0; i < numBlanks; i++) {
+    blanksLetters.push("_");
+  }
+  wordBlank.textContent = blanksLetters.join(" ")
+}
+function setWins() {
+    win.textContent = winCounter;
+    localStorage.setItem("winCount", winCounter);
+  }
+  function setLosses() {
+    lose.textContent = loseCounter;
+    localStorage.setItem("loseCount", loseCounter);
+  }
+  function getWins() {
+    var storedWins = localStorage.getItem("winCount");
+    if (storedWins === null) {
+        winCounter = 0;
+      } else {
+        winCounter = storedWins;
+  }
+  win.textContent = winCounter;
+}
+function getlosses() {
+    var storedLosses = localStorage.getItem("loseCount");
+    if (storedLosses === null) {
+      loseCounter = 0;
+    } else {
+      loseCounter = storedLosses;
+    }
+    lose.textContent = loseCounter;
+  }
+  function checkWin() {
+    if (chosenWord === blanksLetters.join("")) {
+        isWin = true;
+  }
+}
+
